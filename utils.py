@@ -49,6 +49,7 @@ def extract_stimulus_times(trialsDF, stimulusDF):
     return stimulus_times_per_trial
 
 def return_good_cluster_indices(clusters,KSlabels):
+    import numpy as np
     KSlabels = KSlabels[KSlabels['KSLabel\r'] == 'good\r']
     good_clusters = KSlabels['cluster_id'].values
     good_clusters_inds = np.array([])
@@ -59,6 +60,7 @@ def return_good_cluster_indices(clusters,KSlabels):
     return good_clusters_inds
 
 def find_good_trials(vals):
+    import numpy as np
     good_trials = []
     for trial in range(vals.shape[1]):
         if vals[0,trial]['trial_error'][0] == 'no_error':
