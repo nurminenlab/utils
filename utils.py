@@ -1,6 +1,4 @@
-
-
-def getFilePath(windowTitle="Select binary file"):
+def getFilePath(windowTitle="Select binary file",filetypes=None):
     from pathlib import Path
     from tkinter import Tk
     from tkinter import filedialog
@@ -8,7 +6,7 @@ def getFilePath(windowTitle="Select binary file"):
     root = Tk()
     root.withdraw()
     root.attributes("-topmost", True)
-    binFullPath = Path(filedialog.askopenfilename(title=windowTitle))
+    binFullPath = Path(filedialog.askopenfilename(title=windowTitle,filetypes=filetypes))
     root.destroy()
     return binFullPath
 
@@ -49,3 +47,13 @@ def extract_stimulus_times(trialsDF, stimulusDF):
         stimulus_times_per_trial.append(stimulus_times)
 
     return stimulus_times_per_trial
+
+def return_good_cluster_indices(clusters,KSlabels):
+    KSlabels = KSlabels[KSlabels['KSLabel\r'] == 'good\r']
+    good_clusters = KSlabels['cluster_id'].values
+    good_clusters_inds = np.array([])
+    for c in good_clusters:
+        inds = np.where(clusters == c)[0]
+        good_clusters_inds = np.append(good_clusters_inds,inds)
+
+    return good_clusters_inds
