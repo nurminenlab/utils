@@ -57,3 +57,10 @@ def return_good_cluster_indices(clusters,KSlabels):
         good_clusters_inds = np.append(good_clusters_inds,inds)
 
     return good_clusters_inds
+
+def find_good_trials(vals):
+    good_trials = []
+    for trial in range(vals.shape[1]):
+        if vals[0,trial]['trial_error'][0] == 'no_error':
+            good_trials.append(trial)
+    return np.array(good_trials)
