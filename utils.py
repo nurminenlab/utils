@@ -52,7 +52,7 @@ def return_good_cluster_indices(clusters,KSlabels):
     import numpy as np
     KSlabels = KSlabels[KSlabels['KSLabel\r'] == 'good\r']
     good_clusters = KSlabels['cluster_id'].values
-    good_clusters_inds = np.array([])
+    good_clusters_inds = np.array([],dtype=int)
     for c in good_clusters:
         inds = np.where(clusters == c)[0]
         good_clusters_inds = np.append(good_clusters_inds,inds)
